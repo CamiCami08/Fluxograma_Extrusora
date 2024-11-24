@@ -38,35 +38,32 @@ MAX6675 thermocouple1(sckPin1, csPin1, soPin1);
 MAX6675 thermocouple2(sckPin2, csPin2, soPin2);
 MAX6675 thermocouple3(sckPin3, csPin3, soPin3);
 
-bool modoAutomatico = false;       // Variável que indica se o modo automático está ativado
-int page = 0;                      // Página atual do sistema
-int opcaoModo = 0;                 // Opção escolhida para o modo automático (0: Não, 1: Sim)
-int velocidadeFuso = 0;            // Velocidade do motor do fuso (0-99)
-int velocidadeBobinamento = 0;     // Velocidade do motor de bobinamento (0-99)
-int tempMinZ1 = 0;                 // Temperatura Mínima Zona 1 (0-999)
-int tempMaxZ1 = 0;                 // Temperatura Maxima Zona 1 (0-999)
-int tempMinZ2 = 0;                 // Temperatura Mínima Zona 2 (0-999)
-int tempMaxZ2 = 0;                 // Temperatura Maxima Zona 2 (0-999)
-int tempMinZ3 = 0;                 // Temperatura Mínima Zona 3 (0-999)
-int tempMaxZ3 = 0;                 // Temperatura Maxima Zona 3 (0-999)
-int tempZ1 = 0;                    // Temperatura Zona 1 (0-999)
-int tempZ2 = 0;                    // Temperatura Zona 2 (0-999)
-int tempZ3 = 0;                    // Temperatura Zona 3 (0-999)
-int digitoAtual = 1;               // Indica qual dígito está sendo ajustado (1 = centenas, 2 = dezenas, 3 = unidades)
-bool telaResumoDesenhada = false;  // Variável para controlar se a tela já foi desenhada
-//bool telaConfirmacaoDesenhada = false;       // Flag para saber se a tela já foi desenhada
+bool modoAutomatico = false;                 // Variável que indica se o modo automático está ativado
+int page = 0;                                // Página atual do sistema
+int opcaoModo = 0;                           // Opção escolhida para o modo automático (0: Não, 1: Sim)
+int velocidadeFuso = 0;                      // Velocidade do motor do fuso (0-99)
+int velocidadeBobinamento = 0;               // Velocidade do motor de bobinamento (0-99)
+int tempMinZ1 = 0;                           // Temperatura Mínima Zona 1 (0-999)
+int tempMaxZ1 = 0;                           // Temperatura Maxima Zona 1 (0-999)
+int tempMinZ2 = 0;                           // Temperatura Mínima Zona 2 (0-999)
+int tempMaxZ2 = 0;                           // Temperatura Maxima Zona 2 (0-999)
+int tempMinZ3 = 0;                           // Temperatura Mínima Zona 3 (0-999)
+int tempMaxZ3 = 0;                           // Temperatura Maxima Zona 3 (0-999)
+int tempZ1 = 0;                              // Temperatura Zona 1 (0-999)
+int tempZ2 = 0;                              // Temperatura Zona 2 (0-999)
+int tempZ3 = 0;                              // Temperatura Zona 3 (0-999)
+int digitoAtual = 1;                         // Indica qual dígito está sendo ajustado (1 = centenas, 2 = dezenas, 3 = unidades)
+bool telaResumoDesenhada = false;            // Variável para controlar se a tela já foi desenhada
 bool telaResumoAutomaticoDesenhada = false;  // Flag para saber se a tela já foi desenhada
 int posicaoMemoriaSelecionada = 0;           // Posição de memória atualmente selecionada (0-9)
-//const int velocidadeMotor = 0;               // Variável que armazena a velocidade do motor (0 a 99)
-//bool motorLigado = true;                     // Variável para saber se o motor está ligado ou desligado
-const int totalMemorias = 10;        // Total de posições de memória
-int velocidadeBobinaAtualizado = 0;  // Atualiza velocidade da variável com a correção
-unsigned long endTimer = 600000;     // Tempo do contador em milissegundos (10 minutos)
-unsigned long startTimer = 0;        // Armazena o tempo inicial do contador
-bool timer = false;                  // Variável que será true quando o tempo for atingido
-int FSZ1 = 0;                        // Fatores de segurança da zona 1
-int FSZ2 = 0;                        // Fatores de segurança da zona 2
-int FSZ3 = 0;                        // Fatores de segurança da zona 3
+const int totalMemorias = 10;                // Total de posições de memória
+int velocidadeBobinaAtualizado = 0;          // Atualiza velocidade da variável com a correção
+unsigned long endTimer = 600000;             // Tempo do contador em milissegundos (10 minutos)
+unsigned long startTimer = 0;                // Armazena o tempo inicial do contador
+bool timer = false;                          // Variável que será true quando o tempo for atingido
+int FSZ1 = 0;                                // Fatores de segurança da zona 1
+int FSZ2 = 0;                                // Fatores de segurança da zona 2
+int FSZ3 = 0;                                // Fatores de segurança da zona 3
 
 void setup() {
   Serial.begin(9600);
