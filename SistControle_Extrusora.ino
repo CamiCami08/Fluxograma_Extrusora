@@ -37,8 +37,6 @@ int decremento = 51;          // Botão para decremento (pino 51)
 const int pinCS = 43;  // Chip Select
 const int pinUD = 52;  // Up/Down (Incrementa ou Decrementa)
 
-
-
 UTFTGLUE myGLCD(0x0154, A2, A1, A3, A4, A0);     // Configuração dos pinos de controle do display
 MAX6675 thermocouple1(sckPin1, csPin1, soPin1);  // Configuração dos pinos MAX6675 1
 MAX6675 thermocouple2(sckPin2, csPin2, soPin2);  // Configuração dos pinos MAX6675 2
@@ -1123,12 +1121,8 @@ void atualizarValoresTelaExtrusao() {
   // Cabeçalho
   myGLCD.setColor(255, 255, 0);  // Define a cor do texto
   myGLCD.setFont(BigFont);       // Define uma fonte grande
-  if (produzindo) {
-    myGLCD.print("PRODUZINDO", CENTER, 20);  // Exibe "PRODUZINDO"
-  } else {
-    myGLCD.print("AQUECENDO", CENTER, 20);  // Exibe "AQUECENDO"
-  }
-
+  myGLCD.print("PRODUZINDO", CENTER, 20);  // Exibe "PRODUZINDO"
+  
   // Limites de exibição
   int larguraMaxTemp = 100;  // Largura máxima de cada barra de temperatura
   int larguraMaxVel = 200;   // Largura máxima de cada barra de velocidade
@@ -1208,7 +1202,6 @@ void processoExtrusao() {
 
       configurarMotorFuso(velocidadeFuso);                // Inicia o motor do fuso com base na variável 'velocidadeFuso'
       configurarMotorBobinamento(velocidadeBobinamento);  // Inicia o motor de bobinamento com base na variável 'velocidadeBobinamento'
-      produzindo = !produzindo;                           //Altera o cabeçalho para produzindo
       digitalWrite(RELAY5, LOW);                          // Liga Refrigeração Z4 Saída Filamento
     } else {
       // Se alguma zona não estiver dentro dos limites
@@ -1455,6 +1448,7 @@ void telaConfirmacaoSaida() {
     }
   }
 }
+
 // Função de desligamento do sistema
 void desligarSistema() {
   digitalWrite(RELAY1, LOW);    // Liga Refrigeração Alimentação
@@ -1468,9 +1462,6 @@ void desligarSistema() {
   if ((tempZ1 <= tempMinZ1) || (tempZ2 <= tempMinZ2) || (tempZ3 <= tempMinZ3) && (timer == true)) {
     digitalWrite(RELAY8, HIGH);  // Desliga motor do fuso
     digitalWrite(RELAY5, HIGH);  // Desliga Refrigeração Z4 saída filamento
-
-
-  } else {
   }
 
   if ((tempZ1 <= 50) && (tempZ2 <= 50) && (tempZ3 <= 50)) {
@@ -1496,7 +1487,7 @@ void telaEncerramento() {
   myGLCD.clrScr();                           // Limpa a tela
   myGLCD.setColor(250, 250, 250);            // Define a cor do texto
   myGLCD.print("Encerrando!", CENTER, 120);  // Nomes dos autores
-  myGLCD.print("aguarde...", CENTER, 140);   // Ano de criação
+  myGLCD.print("Aguarde...", CENTER, 140);   // Ano de criação
 }
 
 void verificarEmergencia() {
